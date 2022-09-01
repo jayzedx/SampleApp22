@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_serious_crime"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+    <TextView
+        android:id="@+id/crime_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="Crime Title"/>
+    <TextView
+        android:id="@+id/crime_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/crime_title"
+        android:layout_marginEnd="30dp"
+        android:text="Crime Date"/>
+
+    <TextView
+        android:id="@+id/requires_police"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/crime_date"
+        android:text="Requires police"/>
+
+
+</RelativeLayout>
