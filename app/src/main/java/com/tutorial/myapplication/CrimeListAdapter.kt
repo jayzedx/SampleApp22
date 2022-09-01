@@ -62,8 +62,6 @@ class CrimeListAdapter(
         viewType: Int
     ): CrimeHolder {
         val inflater = LayoutInflater.from(parent.context)
-
-
         val holderBinding = when (viewType) {
             R.id.list_item_crime -> ListItemCrimeBinding.inflate(inflater, parent, false)
             else -> ListItemSeriousCrimeBinding.inflate(inflater, parent, false)

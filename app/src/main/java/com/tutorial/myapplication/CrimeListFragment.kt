@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tutorial.myapplication.databinding.FragmentCrimeListBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 private const val ARG_PARAM1 = "param1"
@@ -15,6 +18,7 @@ private const val ARG_PARAM1 = "param1"
 class CrimeListFragment : Fragment() {
     private var param1: String? = null
 
+    private var job: Job? = null
     private val crimeListViewModel: CrimeListViewModel by viewModels()
     private var _binding: FragmentCrimeListBinding? = null
     private val binding
@@ -35,16 +39,23 @@ class CrimeListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentCrimeListBinding.inflate(inflater, container, false)
-
         binding.crimeRecyclerView.layoutManager = LinearLayoutManager(context)
-        val crimes = crimeListViewModel.crimes
-        val adapter = CrimeListAdapter(crimes)
-        binding.crimeRecyclerView.adapter = adapter
-
-
         return binding.root
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        job = viewLifecycleOwner.lifecycleScope.launch {
+            val crimes = crimeListViewModel.loadCrimes()
+            binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes)
+        }
+    }
+    override fun onStop() {
+        super.onStop()
+        job?.cancel()
+    }
+
 
     companion object {
         fun newInstance(param1: String, param2: String) =
