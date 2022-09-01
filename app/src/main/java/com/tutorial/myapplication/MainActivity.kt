@@ -25,13 +25,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.nextButton.setOnClickListener {
+        binding.activityButton.setOnClickListener {
             val intent = MainActivity.newIntent(this@MainActivity, callback)
             //startActivity(intent)
             secondLauncher.launch(intent)
-
-
-
         }
     }
 
