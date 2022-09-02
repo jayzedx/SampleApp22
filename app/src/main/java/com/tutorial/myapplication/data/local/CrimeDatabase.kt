@@ -19,16 +19,21 @@ abstract class CrimeDatabase : RoomDatabase() {
     abstract fun crimeDao(): CrimeDao
 
     companion object {
-        private var INSTANCE: CrimeDatabase? = null
+        private var instance: CrimeDatabase? = null
 
         fun initialize(context: Context) {
-            if (INSTANCE == null)
-                INSTANCE = getDatabase(context)
+            if (instance == null) {
+                synchronized(CrimeDatabase::class.java) {
+                    if (instance == null) {
+                        instance = buildDatabase(context)
+                    }
+                }
+            }
         }
 
-        fun getInstance() = INSTANCE ?: throw IllegalStateException("CrimeRepository must be initialized")
+        fun getInstance() = instance ?: throw IllegalStateException("CrimeDatabase must be initialized")
 
-        private fun getDatabase(context: Context): CrimeDatabase = Room
+        private fun buildDatabase(context: Context): CrimeDatabase = Room
             .databaseBuilder(
                 context.applicationContext,
                 CrimeDatabase::class.java,

@@ -9,13 +9,17 @@ class CrimeRepository  {
     private val db = CrimeDatabase.getInstance()
 
     companion object {
-        private var INSTANCE: CrimeRepository? = null
+        private var instance: CrimeRepository? = null
 
         fun getInstance(): CrimeRepository {
-            if (INSTANCE == null) {
-                INSTANCE = CrimeRepository()
+            if (instance == null) {
+                synchronized(CrimeRepository::class.java) {
+                    if (instance == null) {
+                        instance = CrimeRepository()
+                    }
+                }
             }
-            return INSTANCE as CrimeRepository
+            return instance as CrimeRepository
         }
     }
 
