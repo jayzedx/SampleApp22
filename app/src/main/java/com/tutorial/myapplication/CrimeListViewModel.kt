@@ -33,10 +33,10 @@ class CrimeListViewModel : ViewModel() {
 
     //run async
     suspend fun loadCrimes(): List<Crime> {
-        /*
+
         val result = mutableListOf<Crime>()
         delay(10)
-        for (i in 0 until 15) {
+        for (i in 0 until 10) {
             val crime = Crime(
                 id = UUID.randomUUID(),
                 title = "Crime #$i",
@@ -49,8 +49,7 @@ class CrimeListViewModel : ViewModel() {
             )
             result += crime
         }
-        return result
-         */
-        return crimeRepository.getCrimes()
+
+        return crimeRepository.getCrimes() + result
     }
 }

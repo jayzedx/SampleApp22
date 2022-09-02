@@ -11,5 +11,5 @@ data class Crime(
     val title: String,
     val date: Date,
     val isSolved: Boolean,
-//    val requiresPolice: Boolean
+    val requiresPolice: Boolean? = null
     )

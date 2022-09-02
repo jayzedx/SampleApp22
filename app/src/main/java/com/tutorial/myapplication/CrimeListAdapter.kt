@@ -86,10 +86,9 @@ class CrimeListAdapter(
     override fun getItemCount() = crimes.size
 
     override fun getItemViewType(position: Int): Int {
-        return R.id.list_item_crime
-//        return when (crimes[position].requiresPolice) {
-//             true -> R.id.list_item_crime
-//            else -> R.id.list_item_serious_crime
-//        }
+        return when (crimes[position].requiresPolice) {
+             true -> R.id.list_item_serious_crime
+            else -> R.id.list_item_crime
+        }
     }
 }
