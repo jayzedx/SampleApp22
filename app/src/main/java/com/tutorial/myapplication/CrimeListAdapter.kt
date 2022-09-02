@@ -39,7 +39,7 @@ private class SeriousCrimeHolder(binding: ListItemSeriousCrimeBinding) : CrimeHo
         val binding = holderBinding as ListItemSeriousCrimeBinding
         binding.crimeTitle.text = crime.title
         binding.crimeDate.text = crime.date.toString()
-        binding.requiresPolice.text = crime.requiresPolice.toString()
+//        binding.requiresPolice.text = crime.requiresPolice.toString()
 
         binding.root.setOnClickListener {
             Toast.makeText(
@@ -86,10 +86,10 @@ class CrimeListAdapter(
     override fun getItemCount() = crimes.size
 
     override fun getItemViewType(position: Int): Int {
-//        return R.id.list_item_crime
-        return when (crimes[position].requiresPolice) {
-             true -> R.id.list_item_crime
-            else -> R.id.list_item_serious_crime
-        }
+        return R.id.list_item_crime
+//        return when (crimes[position].requiresPolice) {
+//             true -> R.id.list_item_crime
+//            else -> R.id.list_item_serious_crime
+//        }
     }
 }

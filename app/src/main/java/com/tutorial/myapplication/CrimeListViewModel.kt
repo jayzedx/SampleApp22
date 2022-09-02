@@ -2,11 +2,13 @@ package com.tutorial.myapplication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tutorial.myapplication.data.remote.CrimeRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
 class CrimeListViewModel : ViewModel() {
+    private val crimeRepository = CrimeRepository.getInstance()
     val crimes = mutableListOf<Crime>()
     init {
         //run async
@@ -31,9 +33,10 @@ class CrimeListViewModel : ViewModel() {
 
     //run async
     suspend fun loadCrimes(): List<Crime> {
+        /*
         val result = mutableListOf<Crime>()
-        delay(5000)
-        for (i in 0 until 100) {
+        delay(10)
+        for (i in 0 until 15) {
             val crime = Crime(
                 id = UUID.randomUUID(),
                 title = "Crime #$i",
@@ -47,6 +50,7 @@ class CrimeListViewModel : ViewModel() {
             result += crime
         }
         return result
+         */
+        return crimeRepository.getCrimes()
     }
-
 }
