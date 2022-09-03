@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tutorial.myapplication.databinding.FragmentCrimeListBinding
 import kotlinx.coroutines.Job
@@ -48,7 +49,12 @@ class CrimeListFragment : Fragment() {
         super.onStart()
         job = viewLifecycleOwner.lifecycleScope.launch {
             val crimes = crimeListViewModel.loadCrimes()
-            binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes)
+            binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes) { crimeId ->
+                findNavController().navigate(
+                    CrimeListFragmentDirections.showCrimeDetail(crimeId)
+                )
+
+            }
         }
     }
     override fun onStop() {

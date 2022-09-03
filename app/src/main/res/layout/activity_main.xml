@@ -9,13 +9,18 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:name="com.tutorial.myapplication.CrimeListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:context=".MainActivity" />
+        tools:context=".MainActivity"
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
